@@ -12,6 +12,8 @@ import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 
 import statemachine.engine.api.CancellationReason;
+import statemachine.engine.impl.events.StateChangedEvent;
+import statemachine.engine.impl.events.TransitionEvent;
 import statemachine.engine.support.MockTransitionInspector;
 import statemachine.engine.support.Reason;
 import statemachine.engine.support.StateName;
@@ -19,7 +21,7 @@ import statemachine.engine.support.StateName;
 public class StateMachineTest
 {
     private var _dispatcher:FSMDispatcher;
-    private var _classUnderTest:StateMachine;
+    private var _classUnderTest:StateMachineEngine;
     private var _props:StateMachineProperties;
     private var _targetState:State;
     private var _currentState:State;
@@ -35,7 +37,7 @@ public class StateMachineTest
         _props = new StateMachineProperties();
         _props.current = _currentState;
         _inspector = new MockTransitionInspector( true );
-        _classUnderTest = new StateMachine( _dispatcher, _inspector );
+        _classUnderTest = new StateMachineEngine( _dispatcher, _inspector );
         _dipatchedEvents = [];
     }
 

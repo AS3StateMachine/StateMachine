@@ -8,6 +8,8 @@ import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 import org.swiftsuspenders.Injector;
 
+import statemachine.engine.impl.reasons.UndeclaredTarget;
+
 import statemachine.engine.support.GrumpyStateGuard;
 import statemachine.engine.support.GrumpyStateGuardWithReason;
 import statemachine.engine.support.HappyStateGuard;

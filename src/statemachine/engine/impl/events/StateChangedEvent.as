@@ -1,4 +1,4 @@
-package statemachine.engine.impl
+package statemachine.engine.impl.events
 {
 import flash.events.Event;
 

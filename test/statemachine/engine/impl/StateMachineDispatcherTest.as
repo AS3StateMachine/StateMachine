@@ -8,6 +8,8 @@ import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.strictlyEqualTo;
 
 import statemachine.engine.api.CancellationReason;
+import statemachine.engine.impl.events.StateChangedEvent;
+import statemachine.engine.impl.events.TransitionEvent;
 import statemachine.engine.support.Reason;
 import statemachine.engine.support.StateName;
 

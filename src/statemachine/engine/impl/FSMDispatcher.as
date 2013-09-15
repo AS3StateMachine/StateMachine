@@ -3,6 +3,8 @@ package statemachine.engine.impl
 import flash.events.EventDispatcher;
 
 import statemachine.engine.api.CancellationReason;
+import statemachine.engine.impl.events.StateChangedEvent;
+import statemachine.engine.impl.events.TransitionEvent;
 
 public class FSMDispatcher extends EventDispatcher
 {

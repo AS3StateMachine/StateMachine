@@ -3,6 +3,7 @@ package statemachine.engine.impl
 import org.swiftsuspenders.Injector;
 
 import statemachine.engine.api.CancellationReason;
+import statemachine.engine.impl.reasons.UndeclaredTarget;
 
 public class TransitionInspector
 {

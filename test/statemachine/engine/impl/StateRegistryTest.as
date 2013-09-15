@@ -12,13 +12,13 @@ import statemachine.engine.support.StateName;
 
 public class StateRegistryTest
 {
-    private var _classUnderTest:StateRegistry;
+    private var _classUnderTest:StateProvider;
 
 
     [Before]
     public function before():void
     {
-        _classUnderTest = new StateRegistry();
+        _classUnderTest = new StateProvider();
     }
 
     [After]

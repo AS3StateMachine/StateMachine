@@ -4,19 +4,20 @@ import org.hamcrest.assertThat;
 import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isTrue;
 
-import statemachine.engine.impl.StateRegistry;
+import statemachine.engine.impl.StateProvider;
+import statemachine.engine.api.FSMBuilder;
 import statemachine.engine.support.StateName;
 
 public class FSMBuilderTest
 {
     private var _classUnderTest:FSMBuilder;
-    private var _registry:StateRegistry;
+    private var _registry:StateProvider;
 
 
     [Before]
     public function before():void
     {
-        _registry = new StateRegistry();
+        _registry = new StateProvider();
         _classUnderTest = new FSMBuilder( _registry );
     }
 

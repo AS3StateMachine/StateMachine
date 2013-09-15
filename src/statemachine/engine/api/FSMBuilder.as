@@ -1,12 +1,12 @@
 package statemachine.engine.api
 {
-import statemachine.engine.impl.StateRegistry;
+import statemachine.engine.impl.StateProvider;
 
 public class FSMBuilder
 {
-    private var stateRegistry:StateRegistry;
+    private var stateRegistry:StateProvider;
 
-    public function FSMBuilder( stateRegistry:StateRegistry )
+    public function FSMBuilder( stateRegistry:StateProvider )
     {
         this.stateRegistry = stateRegistry;
     }

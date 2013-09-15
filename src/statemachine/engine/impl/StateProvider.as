@@ -3,7 +3,7 @@ package statemachine.engine.impl
 
 import flash.utils.Dictionary;
 
-public class StateRegistry
+public class StateProvider
 {
     private const _registry:Dictionary = new Dictionary( false );
 

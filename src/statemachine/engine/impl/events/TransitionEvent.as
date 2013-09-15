@@ -1,5 +1,7 @@
-package statemachine.engine.impl
+package statemachine.engine.impl.events
 {
+import statemachine.engine.impl.*;
+
 import flash.events.Event;
 
 import statemachine.engine.api.CancellationReason;

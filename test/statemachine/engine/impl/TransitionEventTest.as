@@ -4,6 +4,8 @@ import org.hamcrest.assertThat;
 import org.hamcrest.object.equalTo;
 import org.hamcrest.object.instanceOf;
 
+import statemachine.engine.impl.events.TransitionEvent;
+
 import statemachine.engine.support.Reason;
 import statemachine.engine.support.StateName;
 

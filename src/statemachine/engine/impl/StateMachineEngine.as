@@ -3,12 +3,12 @@ package statemachine.engine.impl
 import statemachine.engine.api.CancellationReason;
 import statemachine.engine.impl.errors.NestedTransitionError;
 
-public class StateMachine
+public class StateMachineEngine
 {
     private var _dispatcher:FSMDispatcher;
     private var _inspector:TransitionInspector;
 
-    public function StateMachine( dispatcher:FSMDispatcher, approval:TransitionInspector )
+    public function StateMachineEngine( dispatcher:FSMDispatcher, approval:TransitionInspector )
     {
         _dispatcher = dispatcher;
         _inspector = approval;
@@ -16,9 +16,8 @@ public class StateMachine
 
     public function changeState( target:State, props:StateMachineProperties ):Boolean
     {
-        //todo create cusstom error
-        if( props.phase != TransitionPhase.NULL)
-            throw new NestedTransitionError(props);
+        if ( props.phase != TransitionPhase.NULL )
+            throw new NestedTransitionError( props );
 
         props.target = target;
         const approval:Approval = _inspector.inspect( props );
