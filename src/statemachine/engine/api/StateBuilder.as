@@ -5,10 +5,13 @@ import statemachine.engine.impl.State;
 public class StateBuilder
 {
     internal var state:State;
+    private var _parent:FSMBuilder;
 
-    public function StateBuilder( clientState:State ):void
+
+    public function StateBuilder( clientState:State, parent:FSMBuilder ):void
     {
         state = clientState;
+        _parent = parent;
     }
 
     public function withEntryGuards( ...guards ):StateBuilder
@@ -35,6 +38,11 @@ public class StateBuilder
         }
 
         return this;
+    }
+
+    public function get and():FSMBuilder
+    {
+        return _parent;
     }
 
 

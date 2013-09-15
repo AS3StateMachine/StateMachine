@@ -20,18 +20,16 @@ public class FSMConfiguration
 
     public function configure():void
     {
+        injector.parentInjector.map( FSMDispatcher ).asSingleton();
+
         injector.map( Injector ).toValue( injector );
         injector.map( StateProvider ).asSingleton();
-        injector.map( FSMDispatcher ).asSingleton();
         injector.map( StateMachineProperties ).asSingleton();
         injector.map( StateMachineEngine ).asSingleton();
         injector.map( TransitionInspector );
 
         const builder:FSMBuilder = injector.instantiateUnmapped( FSMBuilder );
         injector.parentInjector.map( FSMBuilder ).toValue( builder );
-
-        const props:FSMProperties = injector.instantiateUnmapped( StateMachineProperties );
-        injector.parentInjector.map( FSMProperties ).toValue( props );
 
         const fsm:FSM = injector.instantiateUnmapped( StateMachineDriver );
         injector.parentInjector.map( FSM ).toValue( fsm );

@@ -2,25 +2,41 @@ package statemachine.engine.api
 {
 import org.hamcrest.assertThat;
 import org.hamcrest.collection.array;
+import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 
 import statemachine.engine.impl.State;
 import statemachine.engine.support.GrumpyStateGuard;
 import statemachine.engine.support.HappyStateGuard;
+import statemachine.engine.support.StubFSMBuilder;
 import statemachine.engine.support.StateName;
 
 public class StateBuilderTest
 {
     private var _classUnderTest:StateBuilder;
     private var _state:State;
+    private var _parentBuilder:StubFSMBuilder;
 
 
     [Before]
     public function before():void
     {
         _state = new State( StateName.ONE );
-        _classUnderTest = new StateBuilder( _state );
+        _parentBuilder = new StubFSMBuilder();
+        _classUnderTest = new StateBuilder( _state, _parentBuilder);
+    }
+
+    [Test]
+    public function and_returns_instanceOf_FSMBuilder():void
+    {
+        assertThat( _classUnderTest.and, instanceOf( FSMBuilder ) );
+    }
+
+    [Test]
+    public function and_returns_parentBuilder():void
+    {
+        assertThat( _classUnderTest.and, strictlyEqualTo( _parentBuilder ) );
     }
 
     [Test]
@@ -75,8 +91,6 @@ public class StateBuilderTest
         assertThat( _state.hasTarget( StateName.FOUR ), isTrue() );
         assertThat( _state.hasTarget( StateName.TARGET ), isTrue() );
     }
-
-
 
 
 }

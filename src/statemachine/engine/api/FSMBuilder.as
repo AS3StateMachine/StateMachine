@@ -14,7 +14,8 @@ public class FSMBuilder
     public function configureState( stateName:String ):StateBuilder
     {
         return  new StateBuilder(
-                stateRegistry.getState( stateName )
+                stateRegistry.getState( stateName ),
+                this
         );
     }
 

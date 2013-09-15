@@ -45,14 +45,6 @@ public class FSMConfigurationTest
     }
 
     [Test]
-    public function configure_maps_FSMDispatcher_to_childInjector():void
-    {
-        _classUnderTest.configure();
-        assertThat( _classUnderTest.injector.hasMapping( FSMDispatcher ), isTrue() );
-
-    }
-
-    [Test]
     public function configure_maps_TransitionInspector_to_childInjector():void
     {
         _classUnderTest.configure();
@@ -93,12 +85,13 @@ public class FSMConfigurationTest
     }
 
     [Test]
-    public function configure_maps_FSMProperties_to_injector():void
+    public function configure_maps_FSMDispatcher_to_childInjector():void
     {
         _classUnderTest.configure();
-        assertThat( _injector.hasMapping( FSMProperties ), isTrue() );
+        assertThat( _injector.hasMapping( FSMDispatcher ), isTrue() );
 
     }
+
 }
 
 

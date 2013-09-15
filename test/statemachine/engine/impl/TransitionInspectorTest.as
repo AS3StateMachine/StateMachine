@@ -9,7 +9,6 @@ import org.hamcrest.object.strictlyEqualTo;
 import org.swiftsuspenders.Injector;
 
 import statemachine.engine.impl.reasons.UndeclaredTarget;
-
 import statemachine.engine.support.GrumpyStateGuard;
 import statemachine.engine.support.GrumpyStateGuardWithReason;
 import statemachine.engine.support.HappyStateGuard;
@@ -30,7 +29,7 @@ public class TransitionInspectorTest
         _injector = new Injector();
         _current = new State( StateName.CURRENT );
         _target = new State( StateName.TARGET );
-        _props =  new StateMachineProperties();
+        _props = new StateMachineProperties();
         _props.current = _current;
         _props.target = _target;
         _classUnderTest = new TransitionInspector( _injector );
@@ -47,6 +46,13 @@ public class TransitionInspectorTest
     public function when_target_undeclared_in_current__returns_false():void
     {
         assertThat( _classUnderTest.inspect( _props ).approved, isFalse() );
+    }
+
+    [Test]
+    public function when_current_is_NULL__returns_true():void
+    {
+        _props.current = State.NULL;
+        assertThat( _classUnderTest.inspect( _props ).approved, isTrue() );
     }
 
     [Test]
@@ -77,7 +83,7 @@ public class TransitionInspectorTest
     {
         addTargetToCurrentState();
         addExitGuardToCurrentState( HappyStateGuard );
-        assertThat( _classUnderTest.inspect(_props ).approved, isTrue() );
+        assertThat( _classUnderTest.inspect( _props ).approved, isTrue() );
     }
 
     [Test]

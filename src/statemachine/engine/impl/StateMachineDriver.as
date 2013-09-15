@@ -1,6 +1,7 @@
 package statemachine.engine.impl
 {
 import statemachine.engine.api.FSM;
+import statemachine.engine.api.FSMProperties;
 
 public class StateMachineDriver implements FSM
 {
@@ -24,6 +25,11 @@ public class StateMachineDriver implements FSM
             _engine.changeState(target, _props);
         }
         return true;
+    }
+
+    public function get properties():FSMProperties
+    {
+        return _props;
     }
 }
 }

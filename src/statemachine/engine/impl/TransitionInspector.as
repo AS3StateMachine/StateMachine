@@ -9,7 +9,6 @@ public class TransitionInspector
 {
     private var _injector:Injector;
 
-
     public function TransitionInspector( injector:Injector )
     {
         _injector = injector;
@@ -19,7 +18,8 @@ public class TransitionInspector
     {
         const current:State = props.current;
         const target:State = props.target;
-        if ( !current.hasTarget( target.name ) )
+
+        if ( !current.hasTarget( target.name ) && current !== State.NULL )
             return new Approval( false, getUndeclaredTargetReason( current, target ) );
 
         const exitApproval:Approval = approveGuards( current.exitGuards, _injector );
@@ -27,7 +27,6 @@ public class TransitionInspector
 
         const entryApproval:Approval = approveGuards( target.entryGuards, _injector );
         if ( !entryApproval.approved ) return entryApproval;
-
 
         return new Approval();
     }
