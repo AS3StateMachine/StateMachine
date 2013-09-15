@@ -113,7 +113,7 @@ public class StateMachineTest
     [Test]
     public function when_unsuccessful_StateChangedEvent_FAILED_is_dispatched():void
     {
-        setInspectorTo( true );
+        setInspectorTo( false );
         _dispatcher.addEventListener( StateChangedEvent.FAILED, onTransition );
         _classUnderTest.changeState( _targetState, _props );
 
@@ -130,7 +130,7 @@ public class StateMachineTest
         const onTearDown = function ( event:TransitionEvent ):void
         {
             if ( event.phase === TransitionPhase.TEAR_DOWN){
-                recievedPhase = _props.currentPhase
+                recievedPhase = _props.phase
             }
         }
 
@@ -149,7 +149,7 @@ public class StateMachineTest
         const onSetUp = function ( event:TransitionEvent ):void
         {
             if ( event.phase === TransitionPhase.SET_UP){
-                recievedPhase = _props.currentPhase;
+                recievedPhase = _props.phase;
             }
         }
 
@@ -179,7 +179,7 @@ public class StateMachineTest
         const onCancel = function ( event:TransitionEvent ):void
         {
             if ( event.phase === TransitionPhase.CANCELLATION){
-                recievedPhase = _props.currentPhase;
+                recievedPhase = _props.phase;
                 recievedReason = _props.reason;
             }
         }
@@ -203,7 +203,7 @@ public class StateMachineTest
 
     }
 
-    [Test(expects="statemachine.engine.impl.NestedTransitionError")]
+    [Test(expects='statemachine.engine.impl.errors.NestedTransitionError')]
     public function nested_state_change_within_tear_down_phase_throws_error():void
     {
         setInspectorTo( true );
@@ -212,7 +212,7 @@ public class StateMachineTest
 
     }
 
-    [Test(expects="statemachine.engine.impl.NestedTransitionError")]
+    [Test(expects='statemachine.engine.impl.errors.NestedTransitionError')]
     public function nested_state_change_within_set_up_phase_throws_error():void
     {
         setInspectorTo( true );
@@ -220,7 +220,7 @@ public class StateMachineTest
         _classUnderTest.changeState( _targetState, _props );
 
     }
-    [Test(expects="statemachine.engine.impl.NestedTransitionError")]
+    [Test(expects='statemachine.engine.impl.errors.NestedTransitionError')]
     public function nested_state_change_within_cancellation_phase_throws_error():void
     {
         setInspectorTo( false );

@@ -10,14 +10,19 @@ public class StateMachineProperties implements FSMProperties
     internal var phase:TransitionPhase = TransitionPhase.NULL;
     internal var reason:CancellationReason = CancellationReason.NULL;
 
-    public function get currentStateName():String
+    public function get currentState():String
     {
         return current.name;
     }
 
-    public function get currentPhase():TransitionPhase
+    public function get currentTarget():String
     {
-        return phase;
+        return target.name;
+    }
+
+    public function get currentPhase():String
+    {
+        return phase.name;
     }
 
 

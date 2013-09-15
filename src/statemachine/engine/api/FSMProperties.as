@@ -1,11 +1,10 @@
 package statemachine.engine.api
 {
-import statemachine.engine.impl.TransitionPhase;
-
 public interface FSMProperties
 {
-    function get currentStateName():String;
+    function get currentState():String;
+    function get currentTarget():String;
 
-    function get currentPhase():TransitionPhase;
+    function get currentPhase():String;
 }
 }
