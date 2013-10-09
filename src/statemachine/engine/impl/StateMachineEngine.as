@@ -5,10 +5,10 @@ import statemachine.engine.impl.errors.NestedTransitionError;
 
 public class StateMachineEngine
 {
-    private var _dispatcher:FSMDispatcher;
+    private var _dispatcher:StateDispatcher;
     private var _inspector:TransitionInspector;
 
-    public function StateMachineEngine( dispatcher:FSMDispatcher, approval:TransitionInspector )
+    public function StateMachineEngine( dispatcher:StateDispatcher, approval:TransitionInspector )
     {
         _dispatcher = dispatcher;
         _inspector = approval;
@@ -32,7 +32,7 @@ public class StateMachineEngine
 
             props.phase = TransitionPhase.SET_UP;
             _dispatcher
-                    .forState( props.current )
+                    .forState( props.target )
                     .inPhase( TransitionPhase.SET_UP )
                     .dispatchPhaseChange();
 

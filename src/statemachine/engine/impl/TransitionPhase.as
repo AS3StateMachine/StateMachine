@@ -19,6 +19,11 @@ public class TransitionPhase
         return _name;
     }
 
+    public function get id():String
+    {
+        return _name.split("/")[1];
+    }
+
     public function toString():String
     {
         return _name;

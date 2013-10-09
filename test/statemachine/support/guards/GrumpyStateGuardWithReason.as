@@ -5,15 +5,23 @@
 //  in accordance with the terms of the license agreement accompanying it. 
 //------------------------------------------------------------------------------
 
-package statemachine.engine.support
+package statemachine.support.guards
 {
+import statemachine.support.*;
+import statemachine.engine.api.CancellationReason;
+import statemachine.support.Reason;
 
-public class HappyStateGuard
+public class GrumpyStateGuardWithReason
 {
 
     public function approve():Boolean
     {
-        return true;
+        return false;
+    }
+
+    public function getReason():CancellationReason
+    {
+        return Reason.BECAUSE;
     }
 }
 

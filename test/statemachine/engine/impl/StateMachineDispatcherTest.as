@@ -10,19 +10,19 @@ import org.hamcrest.object.strictlyEqualTo;
 import statemachine.engine.api.CancellationReason;
 import statemachine.engine.impl.events.StateChangedEvent;
 import statemachine.engine.impl.events.TransitionEvent;
-import statemachine.engine.support.Reason;
-import statemachine.engine.support.StateName;
+import statemachine.support.Reason;
+import statemachine.support.StateName;
 
 public class StateMachineDispatcherTest
 {
-    private var _classUnderTest:FSMDispatcher;
+    private var _classUnderTest:StateDispatcher;
     private var _state:State;
     private var _recievedEvent:Event;
 
     [Before]
     public function before():void
     {
-        _classUnderTest = new FSMDispatcher();
+        _classUnderTest = new StateDispatcher();
         _classUnderTest.addEventListener( TransitionEvent.PHASE_CHANGED, onPhaseChanged );
         _classUnderTest.addEventListener( StateChangedEvent.STATE_CHANGED, onStateChanged );
         _classUnderTest.addEventListener( StateChangedEvent.FAILED, onStateChanged );
@@ -59,7 +59,7 @@ public class StateMachineDispatcherTest
     {
         _classUnderTest.dispatchPhaseChange();
         const event:TransitionEvent = _recievedEvent as TransitionEvent;
-        assertThat( event.state, strictlyEqualTo( State.NULL ) );
+        assertThat( event.stateName, strictlyEqualTo( State.NULL.name ) );
         assertThat( event.phase, strictlyEqualTo( TransitionPhase.NULL ) );
         assertThat( event.reason, strictlyEqualTo( CancellationReason.NULL ) );
 
@@ -73,7 +73,7 @@ public class StateMachineDispatcherTest
                 .dispatchPhaseChange();
 
         const event:TransitionEvent = _recievedEvent as TransitionEvent;
-        assertThat( event.state, strictlyEqualTo( _state ) );
+        assertThat( event.stateName, strictlyEqualTo( _state.name ) );
     }
 
     [Test]
@@ -108,13 +108,13 @@ public class StateMachineDispatcherTest
                 .dispatchPhaseChange();
 
         const event:TransitionEvent = _recievedEvent as TransitionEvent;
-        assertThat( event.state, strictlyEqualTo( _state ) );
+        assertThat( event.stateName, strictlyEqualTo( _state.name ) );
         assertThat( event.phase, strictlyEqualTo( TransitionPhase.SET_UP ) );
         assertThat( event.reason, strictlyEqualTo( Reason.BECAUSE ) );
     }
 
     [Test]
-    public function all_properties_are_reset_after_dispatchPase():void
+    public function all_properties_are_reset_after_dispatchPhase():void
     {
         _classUnderTest
                 .forState( _state )
@@ -125,7 +125,7 @@ public class StateMachineDispatcherTest
         _classUnderTest.dispatchPhaseChange();
 
         const event:TransitionEvent = _recievedEvent as TransitionEvent;
-        assertThat( event.state, strictlyEqualTo( State.NULL ) );
+        assertThat( event.stateName, strictlyEqualTo( State.NULL.name ) );
         assertThat( event.phase, strictlyEqualTo( TransitionPhase.NULL ) );
         assertThat( event.reason, strictlyEqualTo( CancellationReason.NULL ) );
     }

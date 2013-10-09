@@ -3,10 +3,11 @@ package statemachine.engine.impl
 import flash.events.EventDispatcher;
 
 import statemachine.engine.api.CancellationReason;
+import statemachine.engine.api.FSMDispatcher;
 import statemachine.engine.impl.events.StateChangedEvent;
 import statemachine.engine.impl.events.TransitionEvent;
 
-public class FSMDispatcher extends EventDispatcher
+public class StateDispatcher extends EventDispatcher implements FSMDispatcher
 {
     private var _state:State = State.NULL;
     private var _phase:TransitionPhase = TransitionPhase.NULL;
@@ -30,19 +31,19 @@ public class FSMDispatcher extends EventDispatcher
         dispatchEvent( new StateChangedEvent( StateChangedEvent.FAILED, props ) );
     }
 
-    public function forState( state:State ):FSMDispatcher
+    public function forState( state:State ):StateDispatcher
     {
         _state = state;
         return this;
     }
 
-    public function inPhase( phase:TransitionPhase ):FSMDispatcher
+    public function inPhase( phase:TransitionPhase ):StateDispatcher
     {
         _phase = phase;
         return this;
     }
 
-    public function because( reason:CancellationReason ):FSMDispatcher
+    public function because( reason:CancellationReason ):StateDispatcher
     {
         _reason = reason;
         return this;

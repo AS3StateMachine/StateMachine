@@ -1,16 +1,20 @@
-package statemachine.engine.api
+package statemachine.engine.builders
 {
+import statemachine.engine.api.*;
+
 import org.hamcrest.assertThat;
 import org.hamcrest.collection.array;
 import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 
+import statemachine.engine.builders.StateBuilder;
+
 import statemachine.engine.impl.State;
-import statemachine.engine.support.GrumpyStateGuard;
-import statemachine.engine.support.HappyStateGuard;
+import statemachine.support.guards.GrumpyStateGuard;
+import statemachine.support.guards.HappyStateGuard;
 import statemachine.engine.support.StubFSMBuilder;
-import statemachine.engine.support.StateName;
+import statemachine.support.StateName;
 
 public class StateBuilderTest
 {

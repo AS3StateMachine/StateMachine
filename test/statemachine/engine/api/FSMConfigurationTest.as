@@ -5,7 +5,7 @@ import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 import org.swiftsuspenders.Injector;
 
-import statemachine.engine.impl.FSMDispatcher;
+import statemachine.engine.impl.StateDispatcher;
 import statemachine.engine.impl.StateMachineEngine;
 import statemachine.engine.impl.StateMachineProperties;
 import statemachine.engine.impl.StateProvider;
@@ -80,17 +80,18 @@ public class FSMConfigurationTest
     public function configure_maps_FSM_to_injector():void
     {
         _classUnderTest.configure();
-        assertThat( _injector.hasMapping( FSM ), isTrue() );
+        assertThat( _injector.hasMapping( StateMachine ), isTrue() );
 
     }
 
     [Test]
-    public function configure_maps_FSMDispatcher_to_childInjector():void
+    public function configure_maps_StateDispatcher_to_childInjector():void
     {
         _classUnderTest.configure();
-        assertThat( _injector.hasMapping( FSMDispatcher ), isTrue() );
+        assertThat( _classUnderTest.injector.hasMapping( StateDispatcher ), isTrue() );
 
     }
+
 
 }
 

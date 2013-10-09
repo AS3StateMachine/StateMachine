@@ -6,8 +6,8 @@ import org.hamcrest.object.instanceOf;
 
 import statemachine.engine.impl.events.TransitionEvent;
 
-import statemachine.engine.support.Reason;
-import statemachine.engine.support.StateName;
+import statemachine.support.Reason;
+import statemachine.support.StateName;
 
 public class TransitionEventTest
 {
@@ -33,7 +33,7 @@ public class TransitionEventTest
     [Test]
     public function state_passed_in_constructor():void
     {
-        assertThat( _event.state.name, equalTo( StateName.ONE ) );
+        assertThat( _event.stateName, equalTo( StateName.ONE ) );
     }
 
     [Test]
@@ -59,7 +59,7 @@ public class TransitionEventTest
     public function clone_stateName_is_identical():void
     {
         const clone:TransitionEvent = _event.clone() as TransitionEvent;
-        assertThat( clone.state, equalTo( _event.state ) );
+        assertThat( clone.stateName, equalTo( _event.stateName ) );
     }
 
     [Test]

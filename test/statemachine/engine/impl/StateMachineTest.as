@@ -15,12 +15,12 @@ import statemachine.engine.api.CancellationReason;
 import statemachine.engine.impl.events.StateChangedEvent;
 import statemachine.engine.impl.events.TransitionEvent;
 import statemachine.engine.support.MockTransitionInspector;
-import statemachine.engine.support.Reason;
-import statemachine.engine.support.StateName;
+import statemachine.support.Reason;
+import statemachine.support.StateName;
 
 public class StateMachineTest
 {
-    private var _dispatcher:FSMDispatcher;
+    private var _dispatcher:StateDispatcher;
     private var _classUnderTest:StateMachineEngine;
     private var _props:StateMachineProperties;
     private var _targetState:State;
@@ -31,7 +31,7 @@ public class StateMachineTest
     [Before]
     public function before():void
     {
-        _dispatcher = new FSMDispatcher();
+        _dispatcher = new StateDispatcher();
         _targetState = new State( StateName.TARGET );
         _currentState = new State( StateName.CURRENT );
         _props = new StateMachineProperties();
@@ -76,17 +76,22 @@ public class StateMachineTest
     }
 
     [Test]
-    public function when_successful__TEAR_DOWN_and_SET_UP_phases_are_dispatched():void
+    public function when_successful__TEAR_DOWN_and_SET_UP_phases_are_dispatched_for_the_correct_states():void
     {
         setInspectorTo( true );
         _dispatcher.addEventListener( TransitionEvent.PHASE_CHANGED, onTransition );
         _classUnderTest.changeState( _targetState, _props );
 
         assertThat( _dipatchedEvents.length, equalTo( 2 ) );
+
         assertThat( _dipatchedEvents[0].phase, strictlyEqualTo( TransitionPhase.TEAR_DOWN ) );
         assertThat( _dipatchedEvents[1].phase, strictlyEqualTo( TransitionPhase.SET_UP ) );
 
+        assertThat( _dipatchedEvents[0].stateName, strictlyEqualTo( StateName.CURRENT ));
+        assertThat( _dipatchedEvents[1].stateName, strictlyEqualTo( StateName.TARGET ) );
+
     }
+
 
     [Test]
     public function when_unsuccessful__CANCELLATION_phase_is_dispatched():void
@@ -129,7 +134,7 @@ public class StateMachineTest
     public function when_in_tear_down_phase__phase_property_set_as_TEAR_DOWN():void
     {
         var recievedPhase:TransitionPhase;
-        const onTearDown = function ( event:TransitionEvent ):void
+        const onTearDown:Function = function ( event:TransitionEvent ):void
         {
             if ( event.phase === TransitionPhase.TEAR_DOWN){
                 recievedPhase = _props.phase
@@ -148,7 +153,7 @@ public class StateMachineTest
     public function when_in_set_up_phase__phase_property_set_as_SET_UPN():void
     {
         var recievedPhase:TransitionPhase;
-        const onSetUp = function ( event:TransitionEvent ):void
+        const onSetUp:Function = function ( event:TransitionEvent ):void
         {
             if ( event.phase === TransitionPhase.SET_UP){
                 recievedPhase = _props.phase;
@@ -178,7 +183,7 @@ public class StateMachineTest
     {
         var recievedPhase:TransitionPhase;
         var recievedReason:CancellationReason;
-        const onCancel = function ( event:TransitionEvent ):void
+        const onCancel:Function = function ( event:TransitionEvent ):void
         {
             if ( event.phase === TransitionPhase.CANCELLATION){
                 recievedPhase = _props.phase;

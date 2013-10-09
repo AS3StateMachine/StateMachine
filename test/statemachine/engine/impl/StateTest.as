@@ -14,11 +14,11 @@ import org.hamcrest.object.isFalse;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 
-import statemachine.engine.support.GrumpyStateGuard;
+import statemachine.support.guards.GrumpyStateGuard;
 
-import statemachine.engine.support.HappyStateGuard;
+import statemachine.support.guards.HappyStateGuard;
 
-import statemachine.engine.support.StateName;
+import statemachine.support.StateName;
 
 public class StateTest
 {

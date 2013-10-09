@@ -1,5 +1,6 @@
 package statemachine.engine.api
 {
+import statemachine.engine.builders.StateBuilder;
 import statemachine.engine.impl.StateProvider;
 
 public class FSMBuilder
@@ -11,7 +12,7 @@ public class FSMBuilder
         this.stateRegistry = stateRegistry;
     }
 
-    public function configureState( stateName:String ):StateBuilder
+    public function configure( stateName:String ):StateBuilder
     {
         return  new StateBuilder(
                 stateRegistry.getState( stateName ),

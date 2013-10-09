@@ -25,9 +25,9 @@ public class TransitionEvent extends Event
     }
 
 
-    public function get state():State
+    public function get stateName():String
     {
-        return _state;
+        return _state.name;
     }
 
     public function get phase():TransitionPhase
@@ -43,7 +43,7 @@ public class TransitionEvent extends Event
 
     public override function clone():Event
     {
-        return new TransitionEvent( state, phase, reason );
+        return new TransitionEvent( _state, phase, reason );
     }
 }
 }

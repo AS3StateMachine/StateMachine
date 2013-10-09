@@ -4,9 +4,11 @@ import org.hamcrest.assertThat;
 import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isTrue;
 
+import statemachine.engine.builders.StateBuilder;
+
 import statemachine.engine.impl.StateProvider;
 import statemachine.engine.api.FSMBuilder;
-import statemachine.engine.support.StateName;
+import statemachine.support.StateName;
 
 public class FSMBuilderTest
 {
@@ -24,13 +26,13 @@ public class FSMBuilderTest
     [Test]
     public function configureState_returns_instance_of_StateBuilder():void
     {
-        assertThat( _classUnderTest.configureState( StateName.CLIENT ), instanceOf( StateBuilder ) );
+        assertThat( _classUnderTest.configure( StateName.CLIENT ), instanceOf( StateBuilder ) );
     }
 
     [Test]
     public function configureState_creates_new_state():void
     {
-        _classUnderTest.configureState( StateName.CLIENT );
+        _classUnderTest.configure( StateName.CLIENT );
         assertThat( _registry.hasState( StateName.CLIENT ), isTrue() );
     }
 

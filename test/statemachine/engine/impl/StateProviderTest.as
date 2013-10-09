@@ -8,9 +8,9 @@ import org.hamcrest.object.isFalse;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 
-import statemachine.engine.support.StateName;
+import statemachine.support.StateName;
 
-public class StateRegistryTest
+public class StateProviderTest
 {
     private var _classUnderTest:StateProvider;
 

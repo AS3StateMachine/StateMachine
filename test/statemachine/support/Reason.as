@@ -1,4 +1,4 @@
-package statemachine.engine.support
+package statemachine.support
 {
 
 import statemachine.engine.api.CancellationReason;

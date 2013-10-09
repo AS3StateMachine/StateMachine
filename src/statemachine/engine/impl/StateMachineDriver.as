@@ -1,19 +1,26 @@
 package statemachine.engine.impl
 {
-import statemachine.engine.api.FSM;
+import flash.events.IEventDispatcher;
+
+import statemachine.engine.api.StateMachine;
 import statemachine.engine.api.FSMProperties;
 
-public class StateMachineDriver implements FSM
+public class StateMachineDriver implements StateMachine
 {
     private var _engine:StateMachineEngine;
     private var _provider:StateProvider;
     private var _props:StateMachineProperties;
+    private var _dispatcher:StateDispatcher;
 
-    public function StateMachineDriver( engine:StateMachineEngine, provider:StateProvider, props:StateMachineProperties ):void
+    public function StateMachineDriver( engine:StateMachineEngine,
+                                        provider:StateProvider,
+                                        props:StateMachineProperties,
+                                        dispatcher:StateDispatcher ):void
     {
         _engine = engine;
         _provider = provider;
         _props = props;
+        _dispatcher = dispatcher;
 
     }
 
@@ -22,14 +29,19 @@ public class StateMachineDriver implements FSM
         if ( _provider.hasState( targetState ) )
         {
             const target:State = _provider.getState( targetState );
-            _engine.changeState(target, _props);
+            return _engine.changeState(target, _props);
         }
-        return true;
+        return false;
     }
 
     public function get properties():FSMProperties
     {
         return _props;
+    }
+
+    public function get dispatcher():IEventDispatcher
+    {
+        return _dispatcher
     }
 }
 }

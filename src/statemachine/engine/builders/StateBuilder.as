@@ -1,5 +1,6 @@
-package statemachine.engine.api
+package statemachine.engine.builders
 {
+import statemachine.engine.api.*;
 import statemachine.engine.impl.State;
 
 public class StateBuilder

@@ -1,7 +1,7 @@
 package statemachine.engine.support
 {
 import statemachine.engine.api.FSMBuilder;
-import statemachine.engine.api.StateBuilder;
+import statemachine.engine.builders.StateBuilder;
 
 public class StubFSMBuilder extends FSMBuilder
 {
@@ -10,7 +10,7 @@ public class StubFSMBuilder extends FSMBuilder
         super(null);
     }
 
-    override public function configureState( stateName:String ):StateBuilder
+    override public function configure( stateName:String ):StateBuilder
     {
         return null;
     }

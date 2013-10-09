@@ -1,5 +1,5 @@
 
-package statemachine.engine.support
+package statemachine.support
 {
 public class StateName
 {
