@@ -5,7 +5,7 @@ import org.hamcrest.object.equalTo;
 import org.swiftsuspenders.Injector;
 
 import statemachine.engine.api.FSMBuilder;
-import statemachine.engine.api.FSMConfiguration;
+import statemachine.engine.FSMConfiguration;
 import statemachine.engine.api.StateMachine;
 import statemachine.support.StateName;
 import statemachine.support.guards.GrumpyStateGuard;

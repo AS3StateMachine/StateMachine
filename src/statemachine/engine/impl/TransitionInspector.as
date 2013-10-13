@@ -11,7 +11,7 @@ public class TransitionInspector
 
     public function TransitionInspector( injector:Injector )
     {
-        _injector = injector;
+        _injector = (injector == null) ? null : injector.createChildInjector();
     }
 
     public function inspect( props:StateMachineProperties ):Approval

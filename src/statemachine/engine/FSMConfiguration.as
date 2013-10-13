@@ -1,5 +1,7 @@
-package statemachine.engine.api
+package statemachine.engine
 {
+import statemachine.engine.api.*;
+
 import org.swiftsuspenders.Injector;
 
 import statemachine.engine.impl.StateDispatcher;

@@ -1,10 +1,11 @@
-package statemachine.engine.api
+package statemachine.engine
 {
 import org.hamcrest.assertThat;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
 import org.swiftsuspenders.Injector;
 
+import statemachine.engine.api.*;
 import statemachine.engine.impl.StateDispatcher;
 import statemachine.engine.impl.StateMachineEngine;
 import statemachine.engine.impl.StateMachineProperties;
