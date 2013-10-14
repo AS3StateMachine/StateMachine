@@ -3,7 +3,9 @@ package statemachine.engine
 import org.hamcrest.assertThat;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
-import org.swiftsuspenders.Injector;
+
+import robotlegs.bender.framework.api.IInjector;
+import robotlegs.bender.framework.impl.RobotlegsInjector;
 
 import statemachine.engine.api.*;
 import statemachine.engine.impl.StateDispatcher;
@@ -14,20 +16,20 @@ import statemachine.engine.impl.TransitionInspector;
 
 public class FSMConfigurationTest
 {
-    private var _injector:Injector;
+    private var _injector:IInjector;
     private var _classUnderTest:FSMConfiguration;
 
     [Before]
     public function before():void
     {
-        _injector = new Injector();
+        _injector = new RobotlegsInjector();
         _classUnderTest = new FSMConfiguration( _injector );
     }
 
     [Test]
     public function constructor_creates_child_injector():void
     {
-        assertThat( _classUnderTest.injector.parentInjector, strictlyEqualTo( _injector ) )
+        assertThat( _classUnderTest.injector.parent, strictlyEqualTo( _injector ) )
     }
 
     [Test]
@@ -41,7 +43,7 @@ public class FSMConfigurationTest
     public function configure_maps_itself_to_Injector():void
     {
         _classUnderTest.configure();
-        assertThat( _classUnderTest.injector.getInstance( Injector ), strictlyEqualTo( _classUnderTest.injector ) );
+        assertThat( _classUnderTest.injector.getInstance( IInjector ), strictlyEqualTo( _classUnderTest.injector ) );
 
     }
 

@@ -2,10 +2,11 @@ package statemachine.engine
 {
 import org.hamcrest.assertThat;
 import org.hamcrest.object.equalTo;
-import org.swiftsuspenders.Injector;
+
+import robotlegs.bender.framework.api.IInjector;
+import robotlegs.bender.framework.impl.RobotlegsInjector;
 
 import statemachine.engine.api.FSMBuilder;
-import statemachine.engine.FSMConfiguration;
 import statemachine.engine.api.StateMachine;
 import statemachine.support.StateName;
 import statemachine.support.guards.GrumpyStateGuard;
@@ -13,7 +14,7 @@ import statemachine.support.guards.HappyStateGuard;
 
 public class StraightTransitionTest
 {
-    private var _injector:Injector;
+    private var _injector:IInjector;
     private var _configuration:FSMConfiguration;
     private var _builder:FSMBuilder;
     private var _fsm:StateMachine;
@@ -21,14 +22,13 @@ public class StraightTransitionTest
     [Before]
     public function before():void
     {
-        _injector = new Injector();
-        _injector.map( Injector ).toValue( _injector );
+        _injector = new RobotlegsInjector();
+        _injector.map( IInjector ).toValue( _injector );
         _configuration = _injector.instantiateUnmapped( FSMConfiguration );
         _configuration.configure();
         _builder = _injector.getInstance( FSMBuilder );
         _fsm = _injector.getInstance( StateMachine );
     }
-
 
     [Test]
     public function no_guards_all_targets_declared():void

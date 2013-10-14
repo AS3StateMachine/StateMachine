@@ -1,30 +1,29 @@
 package statemachine.engine
 {
-import statemachine.flow.api.*;
-
 import flash.events.Event;
 import flash.events.ProgressEvent;
 
 import org.hamcrest.assertThat;
 import org.hamcrest.object.isFalse;
 import org.hamcrest.object.strictlyEqualTo;
-import org.swiftsuspenders.Injector;
 
+import robotlegs.bender.framework.api.IInjector;
+import robotlegs.bender.framework.impl.RobotlegsInjector;
+
+import statemachine.flow.api.*;
 import statemachine.support.TestEvent;
 
 public class PayLoadTest
 {
     private var _classUnderTest:Payload;
-    private var _injector:Injector;
-
+    private var _injector:IInjector;
 
     [Before]
     public function before():void
     {
-        _injector = new Injector();
+        _injector = new RobotlegsInjector();
         _classUnderTest = new Payload();
     }
-
 
     [Test]
     public function add_returns_self():void
@@ -46,7 +45,6 @@ public class PayLoadTest
         assertThat( _injector.getInstance( Event ), strictlyEqualTo( event ) );
         assertThat( _injector.getInstance( ProgressEvent ), strictlyEqualTo( progEvent ) );
     }
-
 
     [Test]
     public function inject_removes_payload_from_injector():void

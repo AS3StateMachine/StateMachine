@@ -6,18 +6,20 @@ import org.hamcrest.object.instanceOf;
 import org.hamcrest.object.isFalse;
 import org.hamcrest.object.isTrue;
 import org.hamcrest.object.strictlyEqualTo;
-import org.swiftsuspenders.Injector;
+
+import robotlegs.bender.framework.api.IInjector;
+import robotlegs.bender.framework.impl.RobotlegsInjector;
 
 import statemachine.engine.impl.reasons.UndeclaredTarget;
+import statemachine.support.Reason;
+import statemachine.support.StateName;
 import statemachine.support.guards.GrumpyStateGuard;
 import statemachine.support.guards.GrumpyStateGuardWithReason;
 import statemachine.support.guards.HappyStateGuard;
-import statemachine.support.Reason;
-import statemachine.support.StateName;
 
 public class TransitionInspectorTest
 {
-    private var _injector:Injector;
+    private var _injector:IInjector;
     private var _classUnderTest:TransitionInspector;
     private var _current:State;
     private var _target:State;
@@ -26,7 +28,7 @@ public class TransitionInspectorTest
     [Before]
     public function before():void
     {
-        _injector = new Injector();
+        _injector = new RobotlegsInjector();
         _current = new State( StateName.CURRENT );
         _target = new State( StateName.TARGET );
         _props = new StateMachineProperties();
@@ -109,7 +111,6 @@ public class TransitionInspectorTest
         addExitGuardToCurrentState( GrumpyStateGuardWithReason );
         assertThat( _classUnderTest.inspect( _props ).reason, strictlyEqualTo( Reason.BECAUSE ) );
     }
-
 
     private function addTargetToCurrentState():void
     {

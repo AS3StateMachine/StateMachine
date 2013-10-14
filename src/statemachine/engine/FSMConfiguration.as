@@ -1,9 +1,8 @@
 package statemachine.engine
 {
+import robotlegs.bender.framework.api.IInjector;
+
 import statemachine.engine.api.*;
-
-import org.swiftsuspenders.Injector;
-
 import statemachine.engine.impl.StateDispatcher;
 import statemachine.engine.impl.StateMachineDriver;
 import statemachine.engine.impl.StateMachineEngine;
@@ -13,30 +12,30 @@ import statemachine.engine.impl.TransitionInspector;
 
 public class FSMConfiguration
 {
-    internal var injector:Injector;
+    internal var injector:IInjector;
 
-    public function FSMConfiguration( injector:Injector )
+    public function FSMConfiguration( injector:IInjector )
     {
-        this.injector = injector.createChildInjector();
+        this.injector = injector.createChild();
     }
 
     public function configure():void
     {
-        injector.map( Injector ).toValue( injector );
+        injector.map( IInjector ).toValue( injector );
         injector.map( StateProvider ).asSingleton();
         injector.map( StateMachineProperties ).asSingleton();
-        injector.map( StateDispatcher ).asSingleton(  );
+        injector.map( StateDispatcher ).asSingleton();
         injector.map( StateMachineEngine ).asSingleton();
         injector.map( TransitionInspector );
 
         const dispatcher:FSMDispatcher = injector.getOrCreateNewInstance( StateDispatcher );
-        injector.parentInjector.map( FSMDispatcher ).toValue( dispatcher );
+        injector.parent.map( FSMDispatcher ).toValue( dispatcher );
 
         const builder:FSMBuilder = injector.instantiateUnmapped( FSMBuilder );
-        injector.parentInjector.map( FSMBuilder ).toValue( builder );
+        injector.parent.map( FSMBuilder ).toValue( builder );
 
         const fsm:StateMachine = injector.instantiateUnmapped( StateMachineDriver );
-        injector.parentInjector.map( StateMachine ).toValue( fsm );
+        injector.parent.map( StateMachine ).toValue( fsm );
 
     }
 
