@@ -3,11 +3,10 @@ package statemachine.engine.impl
 import flash.events.EventDispatcher;
 
 import statemachine.engine.api.CancellationReason;
-import statemachine.engine.api.FSMDispatcher;
 import statemachine.engine.impl.events.StateChangedEvent;
 import statemachine.engine.impl.events.TransitionEvent;
 
-public class StateDispatcher extends EventDispatcher implements FSMDispatcher
+public class StateDispatcher extends EventDispatcher
 {
     private var _state:State = State.NULL;
     private var _phase:TransitionPhase = TransitionPhase.NULL;
