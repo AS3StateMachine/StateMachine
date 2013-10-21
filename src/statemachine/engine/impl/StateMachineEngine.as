@@ -30,14 +30,14 @@ public class StateMachineEngine
                     .inPhase( TransitionPhase.TEAR_DOWN )
                     .dispatchPhaseChange();
 
+            props.current = target;
+
             props.phase = TransitionPhase.SET_UP;
             _dispatcher
                     .forState( props.target )
                     .inPhase( TransitionPhase.SET_UP )
                     .dispatchPhaseChange();
 
-
-            props.current = target;
             props.phase = TransitionPhase.NULL;
             _dispatcher.dispatchChange( props );
 
